@@ -1,0 +1,89 @@
+CREATE TABLE Department (
+    Dept_ID INT PRIMARY KEY NOT NULL,
+    Dept_Name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Student (
+    Student_ID INT PRIMARY KEY,
+    Student_Name VARCHAR(50) NOT NULL,
+    Email VARCHAR(100),
+    Age INT CHECK (Age >= 20),
+    Dept_ID INT,
+    FOREIGN KEY (Dept_ID) REFERENCES Department(Dept_ID)
+);
+
+CREATE TABLE Course (
+    Course_ID INT PRIMARY KEY,
+    Course_Name VARCHAR(50) NOT NULL,
+    Credits INT CHECK (Credits >= 1 AND Credits <= 5),
+    Dept_ID INT,
+    FOREIGN KEY (Dept_ID) REFERENCES Department(Dept_ID)
+);
+
+CREATE TABLE Enrollments (
+    Enrollment_ID INT PRIMARY KEY,
+    Student_ID INT,
+    Course_Name VARCHAR(50) NOT NULL,
+    Semester VARCHAR(20) NOT NULL,
+    FOREIGN KEY (Student_ID) REFERENCES Student(Student_ID)
+);
+
+INSERT INTO Department VALUES (1, 'CS');
+INSERT INTO Department VALUES (2, 'IT');
+INSERT INTO Department VALUES (3, 'Civil');
+INSERT INTO Department VALUES (4, 'ENTC');
+INSERT INTO Department VALUES (5, 'AIDS');
+
+INSERT INTO Student VALUES (101, 'Rahul', 'rahul@gmail.com', 21, 1);
+INSERT INTO Student VALUES (102, 'Amit', 'amit@gmail.com', 22, 2);
+INSERT INTO Student VALUES (103, 'shekhar', 'shekhar@gmail.com', 20, 3);
+INSERT INTO Student VALUES (104, 'Prasad', 'prasad@gmail.com', 23, 4);
+INSERT INTO Student VALUES (105, 'Karan', 'karan@gmail.com', 24, 5);
+
+INSERT INTO Course VALUES (201, 'DBMS', 4, 1);
+INSERT INTO Course VALUES (202, 'COMP', 5, 2);
+INSERT INTO Course VALUES (203, 'JAVA', 3, 3);
+INSERT INTO Course VALUES (204, 'JS', 4, 4);
+INSERT INTO Course VALUES (205, 'Web Development', 2, 5);
+
+INSERT INTO Enrollments VALUES (1, 101, 'DBMS', 'Sem-1');
+INSERT INTO Enrollments VALUES (2, 102, 'COMP', 'Sem-2');
+INSERT INTO Enrollments VALUES (3, 103, 'JAVA', 'Sem-1');
+INSERT INTO Enrollments VALUES (4, 104, 'JS', 'Sem-3');
+INSERT INTO Enrollments VALUES (5, 105, 'Web Development', 'Sem-2');
+
+SELECT * FROM Department;
+
+SELECT * FROM Student;
+
+SELECT * FROM Course;
+
+SELECT * FROM Enrollments;
+
+ALTER TABLE Student
+ADD CONSTRAINT UQ_Email UNIQUE (Email);
+
+INSERT INTO Student
+VALUES (106, 'Rohit', 'rahul@gmail.com', 22, 1);
+
+
+
+
+
+
+Aim:
+
+To create and implement a database containing Department, Student, Course, and Enrollment tables using SQL constraints and relationships.
+
+Objectives:
+Create tables using Primary Key, Foreign Key, NOT NULL, CHECK, and UNIQUE constraints.
+Insert records into all tables.
+Display table data and validate constraints.
+Verify duplicate email restriction using UNIQUE constraint.
+Theory:
+
+A database stores related information in tables. Constraints maintain data integrity. Primary Key uniquely identifies records, Foreign Key establishes relationships, NOT NULL prevents empty values, CHECK validates conditions, and UNIQUE avoids duplicate values.
+
+Conclusion:
+
+Successfully created related tables with constraints, inserted records, displayed data, and verified data integrity using SQL constraints.
