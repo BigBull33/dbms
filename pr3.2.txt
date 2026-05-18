@@ -1,0 +1,76 @@
+CREATE TABLE Department (
+    Dept_ID INT PRIMARY KEY,
+    Dept_Name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Employee (
+    emp_id INT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    department VARCHAR(50) NOT NULL,
+    salary INT CHECK (salary > 0)
+);
+
+CREATE TABLE Student (
+    Student_ID INT PRIMARY KEY,
+    Student_Name VARCHAR(50) NOT NULL,
+    Email VARCHAR(100) UNIQUE,
+    Age INT CHECK (Age >= 18),
+    Marks INT CHECK (Marks >= 0 AND Marks <= 100)
+);
+
+INSERT INTO Department VALUES (1, 'CS');
+INSERT INTO Department VALUES (2, 'IT');
+INSERT INTO Department VALUES (3, 'Civil');
+INSERT INTO Department VALUES (4, 'ENTC');
+INSERT INTO Department VALUES (5, 'AIDS');
+
+INSERT INTO Employee VALUES (101, 'Rahul', 'CS', 25000);
+INSERT INTO Employee VALUES (102, 'Amit', 'IT', 30000);
+INSERT INTO Employee VALUES (103, 'Karan', 'Civil', 28000);
+INSERT INTO Employee VALUES (104, 'Prasad', 'ENTC', 35000);
+INSERT INTO Employee VALUES (105, 'Rohit', 'AIDS', 30000);
+
+INSERT INTO Student VALUES (1, 'Sneha', 'sneha@gmail.com', 20, 85);
+INSERT INTO Student VALUES (2, 'Priya', 'priya@gmail.com', 21, 90);
+INSERT INTO Student VALUES (3, 'Ajay', 'ajay@gmail.com', 20, 78);
+INSERT INTO Student VALUES (4, 'Neha', 'neha@gmail.com', 22, 95);
+INSERT INTO Student VALUES (5, 'Vikas', 'vikas@gmail.com', 21, 88);
+
+SELECT * FROM Department;
+
+SELECT * FROM Employee;
+
+SELECT * FROM Student;
+
+SELECT DISTINCT salary
+FROM Employee
+ORDER BY salary ASC;
+
+SELECT Age, MAX(Marks) AS Highest_Marks
+FROM Student
+GROUP BY Age;
+
+SELECT SUM(Marks) AS Total_Marks
+FROM Student;
+
+SELECT AVG(salary) AS Average_Salary
+FROM Employee;
+
+
+
+Aim:
+
+To create Department, Employee, and Student tables and perform aggregate and sorting operations.
+
+Objectives:
+Create tables with constraints.
+Insert at least five records.
+Use DISTINCT, ORDER BY, MAX(), SUM(), and AVG() functions.
+Analyze employee salary and student marks.
+Theory:
+
+SQL aggregate functions perform calculations on records. DISTINCT removes duplicate values, ORDER BY sorts records, MAX finds highest values, SUM calculates totals, and AVG computes averages.
+
+Conclusion:
+
+Successfully implemented SQL queries using aggregate functions and sorting operations to analyze records.
