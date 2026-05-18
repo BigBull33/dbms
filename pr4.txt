@@ -1,0 +1,65 @@
+-- Create Student_Result Table
+CREATE TABLE Student_Result (
+    stud_id INT PRIMARY KEY,
+    stud_name VARCHAR(50) NOT NULL,
+    subject VARCHAR(50) NOT NULL,
+    Marks INT CHECK (Marks >= 0 AND Marks <= 100),
+    Department VARCHAR(50) NOT NULL
+);
+
+INSERT INTO Student_Result 
+VALUES (1, 'Rahul', 'DBMS', 85, 'CS');
+
+INSERT INTO Student_Result 
+VALUES (2, 'Amit', 'JAVA', 78, 'IT');
+
+INSERT INTO Student_Result 
+VALUES (3, 'Sneha', 'DBMS', 92, 'CS');
+
+INSERT INTO Student_Result 
+VALUES (4, 'Priya', 'COMP', 88, 'ENTC');
+
+INSERT INTO Student_Result 
+VALUES (5, 'Karan', 'JAVA', 81, 'IT');
+
+SELECT * FROM Student_Result;
+
+SELECT Department, COUNT(*) AS Total_Students
+FROM Student_Result
+GROUP BY Department;
+
+SELECT subject, AVG(Marks) AS Average_Marks
+FROM Student_Result
+GROUP BY subject;
+
+SELECT Department, AVG(Marks) AS Average_Marks
+FROM Student_Result
+GROUP BY Department
+HAVING AVG(Marks) > 80;
+
+SELECT subject, COUNT(*) AS Total_Students
+FROM Student_Result
+GROUP BY subject
+HAVING COUNT(*) > 2;
+
+
+
+
+
+
+Aim:
+
+To create Student_Result table and perform GROUP BY and HAVING operations.
+
+Objectives:
+Insert student result records.
+Count students department-wise.
+Calculate average marks.
+Display filtered results using HAVING clause.
+Theory:
+
+GROUP BY groups rows with similar values, while aggregate functions like COUNT() and AVG() perform calculations. HAVING filters grouped data based on conditions.
+
+Conclusion:
+
+Successfully performed grouping and filtering operations using SQL aggregate functions and HAVING clause.
