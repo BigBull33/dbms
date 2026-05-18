@@ -1,0 +1,71 @@
+CREATE TABLE Employees2 (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50) NOT NULL,
+    salary DECIMAL(10,2) NOT NULL
+);
+
+DELIMITER $$
+
+CREATE TRIGGER validate_salary_insert
+BEFORE INSERT ON Employees2
+FOR EACH ROW
+BEGIN
+    IF NEW.salary <= 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT='Invalid Salary! Salary must be greater than 0';
+    END IF;
+END$$
+
+CREATE TRIGGER validate_salary_update
+BEFORE UPDATE ON Employees2
+FOR EACH ROW
+BEGIN
+    IF NEW.salary <= 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT='Invalid Salary! Salary must be greater than 0';
+    END IF;
+END$$
+
+CREATE TRIGGER prevent_high_salary_delete
+BEFORE DELETE ON Employees2
+FOR EACH ROW
+BEGIN
+    IF OLD.salary > 100000 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT='Cannot delete employee with high salary';
+    END IF;
+END$$
+
+DELIMITER ;
+
+INSERT INTO Employees2 VALUES
+(101,'Shekhar',45000),
+(102,'Rahul',120000),
+(103,'Amit',55000);
+
+SELECT * FROM Employees2;
+
+INSERT INTO Employees2 VALUES
+(104,'Rohan',-5000);
+
+DELETE FROM Employees2
+WHERE emp_id=102;
+
+
+
+Aim:
+
+To design and implement database triggers for employee salary validation and deletion control.
+
+Objectives:
+Create employee table with constraints.
+Create BEFORE INSERT and BEFORE UPDATE triggers.
+Validate employee salary values.
+Restrict deletion of employees with high salaries.
+Theory:
+
+A trigger is a stored SQL procedure that executes automatically on database events such as INSERT, UPDATE, or DELETE. Triggers are used to enforce business rules and maintain data integrity.
+
+Conclusion:
+
+Successfully implemented triggers to validate salary values and prevent deletion of employees with high salaries, ensuring secure database operations.
